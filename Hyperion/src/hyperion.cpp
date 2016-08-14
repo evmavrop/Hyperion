@@ -14,6 +14,7 @@
 #include <fstream>
 #include <dehaze.hpp>
 #include <ctime>
+#include <tests.hpp>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -24,6 +25,7 @@ using namespace std;
 using namespace cv;
 
 #define DEBUG 1
+#define TESTS 1
 
 /**
  * Calculates the negative of the RGB image.
@@ -165,10 +167,10 @@ void Configure(list<Mat> &pFrm, InputParameters &inpParam, const int ac, char** 
 		// TODO Read from camera input
 	}
 }
+
 /**
  * The first argument should be the path full path to configuration file.
  */
-
 int main(int argc, char** argv) {
 	InputParameters inpParam;
 	list<Mat> listOfFrames;					// The purpose of the list is to store multiple frames
@@ -178,6 +180,11 @@ int main(int argc, char** argv) {
 
 	if (inpParam.typeOfFile == 0) {
 #if DEBUG
+#if TESTS
+		Test tst;
+		tst.testFuncPadding();
+		tst.testFuncFindAirlight();
+#endif
 		cout << "dims:" << it->dims << endl << "depth:" << it->depth() << endl;
 		cout << "width:" << it->cols << endl << "height:" << it->rows << endl;
 		t = clock();
@@ -200,15 +207,11 @@ int main(int argc, char** argv) {
 		t = clock() - t;
 		cout << "dehazing ended" << endl;
 		cout << "Executed in " << t / CLOCKS_PER_SEC << " seconds" << endl;
-
-
 #endif
 	}
 	else if (inpParam.typeOfFile == 1) {
 		// TODO Make it work with camera input (multiple frames)
 	}
-
-
 
 	return 1;
 }

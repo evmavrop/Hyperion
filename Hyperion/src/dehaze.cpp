@@ -36,13 +36,36 @@ Dehazing::Dehazing(Mat frameMat) {
 
 }
 
+/**
+ * This constructor's values are used for testing.
+ */
+Dehazing::Dehazing() {
+	this->RGBrows = 9;
+	this->RGBcols = 9;
+
+	int size = this->RGBrows * this->RGBcols;
+	this->R = new unsigned char[size]();
+	this->G = new unsigned char[size]();
+	this->B = new unsigned char[size]();
+
+	for (int i = 0; i < size; i++) {
+		R[i] = static_cast<unsigned char>(i);
+		G[i] = static_cast<unsigned char>(i);
+		B[i] = static_cast<unsigned char>(i);
+	}
+	this->paddedR = this->paddedG = this->paddedB = 0;
+	paddedRGBrows = paddedRGBcols = 0;
+}
+
 Dehazing::~Dehazing() {
 	delete[] this->R;
 	delete[] this->G;
 	delete[] this->B;
-	delete[] this->paddedR;
-	delete[] this->paddedG;
-	delete[] this->paddedB;
+	if (this->paddedR != 0 && this->paddedG != 0 && this->paddedB != 0) {
+		delete[] this->paddedR;
+		delete[] this->paddedG;
+		delete[] this->paddedB;
+	}
 }
 
 template<class T> inline T clipping255(const T a) {
@@ -332,3 +355,4 @@ void Dehazing::dehazeProc(InputParameters &inpParam) {
 	}
 	delete[] t;
 }
+

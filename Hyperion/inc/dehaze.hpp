@@ -13,6 +13,7 @@
 #include <inputParameters.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/mat.hpp>
+#include <tests.hpp>
 
 using namespace std;
 using namespace cv;
@@ -29,11 +30,15 @@ private:
 	float *findMediumTransmission(int position, int size, InputParameters &inpParam);
 	int brightestPix(unsigned int **, int size);
 	void padding(InputParameters &inpParam);
+	friend class Test;
+
 public:
+	friend void testFunc();
 	void dehazeProc(InputParameters &inpParam);
 	unsigned char *paddedR, *paddedG, *paddedB;
 	int paddedRGBrows, paddedRGBcols;
 
+	Dehazing();
 	Dehazing(Mat);
 	~Dehazing();
 };

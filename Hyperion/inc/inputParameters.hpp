@@ -6,8 +6,8 @@
  * @version: 1.0 12/8/2016
  */
 
-#ifndef INC_IMAGEPARAMETERS_HPP_
-#define INC_IMAGEPARAMETERS_HPP_
+#ifndef INC_INPUTPARAMETERS_HPP_
+#define INC_INPUTPARAMETERS_HPP_
 
 #include <frame.hpp>
 #include <fstream>
@@ -27,9 +27,9 @@ public:
 		typeOfFile = -1;
 		inputFileName = new char[100];
 		outputFileName = new char[100];
-		blockSizeX = 16;
-		blockSizeY = 16;
-		blockSize = 256;
+		blockSizeX = 9;
+		blockSizeY = 9;
+		blockSize = 81;
 		lowLightVideo = 0;
 	}
 	~InputParameters() {
@@ -38,4 +38,4 @@ public:
 	}
 };
 
-#endif /* INC_IMAGEPARAMETERS_HPP_ */
+#endif /* INC_INPUTPARAMETERS_HPP_ */

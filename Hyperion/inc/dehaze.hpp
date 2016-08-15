@@ -25,22 +25,21 @@ using namespace cv;
 class Dehazing: public Frame {
 private:
 	int findAirlight(int);
-	void quicksort(unsigned int **, int, int);
-	void minRGB(unsigned int **, int);
+	void quicksort(vector<vector<unsigned int> >&, int, int);
+	void minRGB(vector<vector<unsigned int> >&, int);
 	float *findMediumTransmission(int position, int size, InputParameters &inpParam);
-	int brightestPix(unsigned int **, int size);
+	int brightestPix(vector<vector<unsigned int> >&, int size);
 	void padding(InputParameters &inpParam);
 	friend class Test;
 
 public:
 	friend void testFunc();
-	void dehazeProc(InputParameters &inpParam);
-	unsigned char *paddedR, *paddedG, *paddedB;
+	void dehazeProc(InputParameters &);
+	std::vector<unsigned char> paddedR, paddedG, paddedB;
 	int paddedRGBrows, paddedRGBcols;
 
 	Dehazing();
 	Dehazing(Mat);
-	~Dehazing();
 };
 
 #endif /* INC_DEHAZE_HPP_ */

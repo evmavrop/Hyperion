@@ -225,10 +225,10 @@ float *Dehazing::findMediumTransmission(int position, int size, InputParameters 
 	frmRows = this->RGBrows;
 	blockSizeX = inpParam.blockSizeX;
 	blockSizeY = inpParam.blockSizeY;
-	endX = (int) ((float) blockSizeX / 2) + 0.5;
-	endY = (int) ((float) blockSizeY / 2) + 0.5;
-	startX = -(int) (blockSizeX / 2);
-	startY = -(int) (blockSizeY / 2);
+	endX = static_cast<int>(static_cast<float>(blockSizeX) / 2) + 0.5;
+	endY = static_cast<int>(static_cast<float>(blockSizeY) / 2) + 0.5;
+	startX = -blockSizeX / 2;
+	startY = -blockSizeY / 2;
 	int A[3];
 	A[0] = this->R[position];
 	A[1] = this->G[position];
@@ -313,7 +313,7 @@ int Dehazing::findAirlight(int size) {
  */
 void Dehazing::dehazeProc(InputParameters &inpParam) {
 	int size = this->RGBcols * this->RGBrows;
-	float *t, P;
+	float *t, P = 0;
 	int A[3];
 
 	int position = findAirlight(size);
@@ -333,7 +333,7 @@ void Dehazing::dehazeProc(InputParameters &inpParam) {
 				P = 2.0 * t[i] * t[i];
 			}
 			else {
-				P = -2 * t[i] * t[i] * t[i] + 8 * t[i] - 3;
+				P = -2.0 * t[i] * t[i] * t[i] + 8.0 * t[i] - 3.0;
 			}
 			this->R[i] = static_cast<unsigned char>(clipping0(
 					clipping255((this->R[i] - A[0]) / P + A[0])));

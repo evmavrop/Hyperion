@@ -181,7 +181,7 @@ int main(int argc, char** argv) {
 	if (inpParam.typeOfFile == 0) {
 #if DEBUG
 #if TESTS
-		Test tst;
+		Tests tst;
 		tst.testFuncPadding();
 		tst.testFuncFindAirlight();
 #endif

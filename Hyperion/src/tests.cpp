@@ -1,14 +1,16 @@
-/*
+/**
+ * Hyperion
  * tests.cpp
+ * Purpose: Contains the functions required for the dehazing process
  *
- *  Created on: Aug 14, 2016
- *      Author: evmavrop
+ * @author: Mavropoulos Evangelos
+ * @version: 1.0 14/8/2016
  */
 
 #include <tests.hpp>
 #include <iostream>
 
-void Test::testFuncPadding() {
+void Tests::testFuncPadding() {
 	Dehazing testObj;
 	InputParameters params;
 
@@ -42,7 +44,7 @@ void Test::testFuncPadding() {
 	// TODO Save the arrays in a txt file
 }
 
-void Test::testFuncFindAirlight() {
+void Tests::testFuncFindAirlight() {
 	int A[3];
 	Dehazing testObj;
 

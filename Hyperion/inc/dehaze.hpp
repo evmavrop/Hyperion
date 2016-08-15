@@ -30,10 +30,9 @@ private:
 	float *findMediumTransmission(int position, int size, InputParameters &inpParam);
 	int brightestPix(unsigned int **, int size);
 	void padding(InputParameters &inpParam);
-	friend class Test;
+	friend class Tests;
 
 public:
-	friend void testFunc();
 	void dehazeProc(InputParameters &inpParam);
 	unsigned char *paddedR, *paddedG, *paddedB;
 	int paddedRGBrows, paddedRGBcols;

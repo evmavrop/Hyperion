@@ -1,16 +1,20 @@
-/*
+/**
+ * Hyperion
  * tests.hpp
+ * Purpose: Contains the functions required for the dehazing process
  *
- *  Created on: Aug 14, 2016
- *      Author: evmavrop
+ * @author: Mavropoulos Evangelos
+ * @version: 1.0 14/8/2016
  */
 
 #ifndef TESTS_HPP_
 #define TESTS_HPP_
 
 #include <dehaze.hpp>
-
-class Test {
+/**
+ * This class contains member functions whose purpose is to test the output of every function.
+ */
+class Tests {
 	friend class Dehazing;
 
 public:

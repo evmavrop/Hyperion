@@ -1,7 +1,6 @@
 /**
  * Hyperion
  * tests.hpp
- * Purpose: Contains the functions required for the dehazing process
  *
  * @author: Mavropoulos Evangelos
  * @version: 1.0 14/8/2016

@@ -55,9 +55,9 @@ void fromArrayToMat(Mat &frameMat, const Dehazing &frame1D) {
 	int size = rows * cols;
 
 	int realSize = size * channels;
-	unsigned char *R = frame1D.R;
-	unsigned char *G = frame1D.G;
-	unsigned char *B = frame1D.B;
+	const vector<unsigned char>&R = frame1D.R;
+	const vector<unsigned char>&G = frame1D.G;
+	const vector<unsigned char>&B = frame1D.B;
 	unsigned char *temp = frameMat.data;
 
 	for (int i = 0, j = 0; i < realSize - 2; i += 3, j++) {

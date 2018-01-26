@@ -3,69 +3,22 @@
  * dehaze.cpp
  * Purpose: Contains the functions required for the dehazing process
  *
- * @author: Mavropoulos Evangelos
+ * @author: Evangelos Mavropoulos
  * @version: 1.0 12/8/2016
  */
 
 #include <dehaze.hpp>
 #include <iostream>
 
-Dehazing::Dehazing(Mat frameMat) {
-	int rows = this->RGBrows = frameMat.rows;
-	int cols = this->RGBcols = frameMat.cols;
-	int channels = frameMat.channels();
-	int size = rows * cols;
-	int realSize = size * channels;
-
-	this->R = new unsigned char[size]();
-	this->G = new unsigned char[size]();
-	this->B = new unsigned char[size]();
-
-	unsigned char *R = this->R;
-	unsigned char *G = this->G;
-	unsigned char *B = this->B;
-	unsigned char *temp = static_cast<unsigned char*>(frameMat.data);
-
-	for (int i = 0, j = 0; i < realSize - 2; i += 3, j++) {
-		B[j] = temp[i];
-		G[j] = temp[i + 1];
-		R[j] = temp[i + 2];
-	}
-	this->paddedR = this->paddedG = this->paddedB = 0;
-	paddedRGBrows = paddedRGBcols = 0;
-
-}
-
 /**
  * This constructor's values are used for testing.
  */
 Dehazing::Dehazing() {
-	this->RGBrows = 9;
-	this->RGBcols = 9;
 
-	int size = this->RGBrows * this->RGBcols;
-	this->R = new unsigned char[size]();
-	this->G = new unsigned char[size]();
-	this->B = new unsigned char[size]();
-
-	for (int i = 0; i < size; i++) {
-		R[i] = static_cast<unsigned char>(i);
-		G[i] = static_cast<unsigned char>(i);
-		B[i] = static_cast<unsigned char>(i);
-	}
-	this->paddedR = this->paddedG = this->paddedB = 0;
-	paddedRGBrows = paddedRGBcols = 0;
 }
 
 Dehazing::~Dehazing() {
-	delete[] this->R;
-	delete[] this->G;
-	delete[] this->B;
-	if (this->paddedR != 0 && this->paddedG != 0 && this->paddedB != 0) {
-		delete[] this->paddedR;
-		delete[] this->paddedG;
-		delete[] this->paddedB;
-	}
+
 }
 
 template<class T> inline T clipping255(const T a) {
@@ -77,64 +30,22 @@ template<class T> inline T clipping0(const T a) {
 }
 
 /**
- * Generate space around the image with size relative to the block size.
- *
- * @param[in] inpParam
- */
-void Dehazing::padding(InputParameters &inpParam) {
-	this->paddedRGBrows = this->RGBrows + 2 * inpParam.blockSizeY;
-	this->paddedRGBcols = this->RGBcols + 2 * inpParam.blockSizeX;
-	int paddedSize = this->paddedRGBrows * this->paddedRGBcols;
-	int frmRows = this->RGBrows;
-	int frmCols = this->RGBcols;
-
-	this->paddedR = new unsigned char[paddedSize]();
-	this->paddedG = new unsigned char[paddedSize]();
-	this->paddedB = new unsigned char[paddedSize]();
-
-	fill_n(this->paddedR, paddedSize, 255);
-	fill_n(this->paddedG, paddedSize, 255);
-	fill_n(this->paddedB, paddedSize, 255);
-
-	unsigned char *R, *G, *B, *pR, *pG, *pB;
-	R = this->R;
-	G = this->G;
-	B = this->B;
-	pR = this->paddedR;
-	pG = this->paddedG;
-	pB = this->paddedB;
-	int counter = inpParam.blockSizeY * this->paddedRGBcols + inpParam.blockSizeX;
-	int row, column;
-
-	for (int i = 0; i < frmRows; i++) {
-		row = i * frmCols;
-		for (int j = 0; j < frmCols; j++) {
-			column = row + j;
-			pR[counter] = R[column];
-			pG[counter] = G[column];
-			pB[counter] = B[column];
-			counter++;
-		}
-		counter += inpParam.blockSizeX + inpParam.blockSizeX;
-	}
-}
-
-/**
  * Returns the positions of the pixel whose sum of RGB values is the highest amongst the pixels corresponding
  * to the 0.1% of the brightest pixels.
  *
+ * @param[in] inpImage
  * @param[in] minRGBArray the minimum of the RGB values of every pixel in a descending order
  * @param[in] size
  * @return position
  */
-int Dehazing::brightestPix(unsigned int **minRGBArray, int size) {
+int Dehazing::brightestPix(Image &inpImage, unsigned int **minRGBArray, int size) {
 	int brightestPixelsNum = (int) (0.001 * (float) size) + 1;
 	int position, pointer;
 	unsigned int *top = new unsigned int[brightestPixelsNum];
 
 	for (int i = 0; i < brightestPixelsNum; i++) {
 		pointer = minRGBArray[1][i];
-		top[i] = this->R[pointer] + this->G[pointer] + this->B[pointer];
+		top[i] = inpImage.R[pointer] + inpImage.G[pointer] + inpImage.B[pointer];
 	}
 
 	unsigned int max = 0;
@@ -156,15 +67,16 @@ int Dehazing::brightestPix(unsigned int **minRGBArray, int size) {
  * Creates a array containing the minimum of the RGB values for every pixel and the position
  * of the pixel in the image.
  *
+ * @param[in] inpImage
  * @param[in] size
  * @param[out] minRGBArray
  */
-void Dehazing::minRGB(unsigned int **minRGBArray, int size) {
+void Dehazing::minRGB(Image &inpImage, unsigned int **minRGBArray, int size) {
 
 	unsigned char *R, *G, *B;
-	R = this->R;
-	G = this->G;
-	B = this->B;
+	R = inpImage.R;
+	G = inpImage.G;
+	B = inpImage.B;
 
 	for (int i = 0; i < size; i++) {
 		minRGBArray[0][i] = min(min(G[i], B[i]), R[i]);
@@ -213,29 +125,30 @@ void Dehazing::quicksort(unsigned int **minRGBArray, int left, int right) {
 /**
  * Calculates the medium transmission function for every pixel in the image.
  *
+ * @param[in] inpImage
  * @param[in] position
  * @param[in] size
  * @return t
  */
-float *Dehazing::findMediumTransmission(int position, int size, InputParameters &inpParam) {
-	float *t = new float[this->RGBcols * this->RGBrows];
+float *Dehazing::findMediumTransmission(Image &inpImage, int position, int size, InputParameters &inpParam) {
+	float *t = new float[inpImage.RGBcols * inpImage.RGBrows];
 	float omega = 0.8;
 	int frmCols, frmRows, blockSizeX, blockSizeY, counter, startX, startY, endX, endY, pos;
-	frmCols = this->RGBcols;
-	frmRows = this->RGBrows;
+	frmCols = inpImage.RGBcols;
+	frmRows = inpImage.RGBrows;
 	blockSizeX = inpParam.blockSizeX;
 	blockSizeY = inpParam.blockSizeY;
-	endX = static_cast<int>(static_cast<float>(blockSizeX) / 2) + 0.5;
-	endY = static_cast<int>(static_cast<float>(blockSizeY) / 2) + 0.5;
+	endX = static_cast<int> (static_cast<float> (blockSizeX) / 2) + 0.5;
+	endY = static_cast<int> (static_cast<float> (blockSizeY) / 2) + 0.5;
 	startX = -blockSizeX / 2;
 	startY = -blockSizeY / 2;
 	int A[3];
-	A[0] = this->R[position];
-	A[1] = this->G[position];
-	A[2] = this->B[position];
+	A[0] = inpImage.R[position];
+	A[1] = inpImage.G[position];
+	A[2] = inpImage.B[position];
 
-	padding(inpParam);
-	int paddedFrameCols = this->paddedRGBcols;
+	Image paddedImage(inpImage, inpParam.blockSizeY, inpParam.blockSizeX);
+	int paddedFrameCols = paddedImage.RGBcols;
 	pos = 0;
 	unsigned char min;
 
@@ -245,28 +158,28 @@ float *Dehazing::findMediumTransmission(int position, int size, InputParameters 
 		for (int j = 0; j < frmCols; j++) {
 			min = 255;
 
-			for (int l = startY; l < endY; l++) {
-				for (int m = startX; m < endX; m++) {
-					if (min > this->paddedR[counter + m + l * paddedFrameCols]) {
-						min = this->paddedR[counter + m + l * paddedFrameCols];
+			for (int l = startY; l <= endY; l++) {
+				for (int m = startX; m <= endX; m++) {
+					if (min > paddedImage.R[counter + m + l * paddedImage.RGBcols]) {
+						min = paddedImage.R[counter + m + l * paddedImage.RGBcols];
 						pos = 0;
 					}
 				}
 			}
 
-			for (int l = startY; l < endY; l++) {
-				for (int m = startX; m < endX; m++) {
-					if (min > this->paddedG[counter + m + l * paddedFrameCols]) {
-						min = this->paddedG[counter + m + l * paddedFrameCols];
+			for (int l = startY; l <= endY; l++) {
+				for (int m = startX; m <= endX; m++) {
+					if (min > paddedImage.G[counter + m + l * paddedImage.RGBcols]) {
+						min = paddedImage.G[counter + m + l * paddedImage.RGBcols];
 						pos = 1;
 					}
 				}
 			}
 
-			for (int l = startY; l < endY; l++) {
-				for (int m = startX; m < endX; m++) {
-					if (min > this->paddedB[counter + m + l * paddedFrameCols]) {
-						min = this->paddedB[counter + m + l * paddedFrameCols];
+			for (int l = startY; l <= endY; l++) {
+				for (int m = startX; m <= endX; m++) {
+					if (min > paddedImage.B[counter + m + l * paddedImage.RGBcols]) {
+						min = paddedImage.B[counter + m + l * paddedImage.RGBcols];
 						pos = 2;
 					}
 				}
@@ -285,19 +198,20 @@ float *Dehazing::findMediumTransmission(int position, int size, InputParameters 
 /**
  * Finds the position of the pixel that it is used as the Airlight.
  *
+ * @param[in] inpImage
  * @param[in] size
  * @return position
  */
-int Dehazing::findAirlight(int size) {
+int Dehazing::findAirlight(Image &inpImage, int size) {
 	unsigned int **minRGBArray = new unsigned int*[2];
 	minRGBArray[0] = new unsigned int[size];
 	minRGBArray[1] = new unsigned int[size];
 
-	minRGB(minRGBArray, size);
+	minRGB(inpImage, minRGBArray, size);
 
 	quicksort(minRGBArray, 0, size - 1);
 
-	int position = brightestPix(minRGBArray, size);
+	int position = brightestPix(inpImage, minRGBArray, size);
 
 	delete[] minRGBArray[0];
 	delete[] minRGBArray[1];
@@ -307,22 +221,43 @@ int Dehazing::findAirlight(int size) {
 }
 
 /**
+ * Calculates the negative of the RGB image.
+ *
+ * @param[in,out] frm
+ */
+void Dehazing::negative(Image &frm) {
+	int size = frm.RGBcols * frm.RGBrows;
+
+	for (int i = 0; i < size; i++) {
+		frm.R[i] = 255 - frm.R[i];
+		frm.G[i] = 255 - frm.G[i];
+		frm.B[i] = 255 - frm.B[i];
+	}
+}
+
+/**
  * Applies the dehazing process on the image contained in the object.
  *
  * @param[in] inpParam
+ * @param[in] inpImage
+ * @param[out] outpImage
  */
-void Dehazing::dehazeProc(InputParameters &inpParam) {
-	int size = this->RGBcols * this->RGBrows;
+void Dehazing::dehazeProc(InputParameters &inpParam, Image &inpImage, Image &outpImage) {
+	int size = inpImage.RGBcols * inpImage.RGBrows;
 	float *t, P = 0;
 	int A[3];
 
-	int position = findAirlight(size);
+	if (inpParam.lowLightVideo == 1) {
+		negative(inpImage);
+	}
 
-	A[0] = this->R[position];
-	A[1] = this->G[position];
-	A[2] = this->B[position];
+	int position = findAirlight(inpImage, size);
 
-	t = findMediumTransmission(position, size, inpParam);
+	A[0] = inpImage.R[position];
+	A[1] = inpImage.G[position];
+	A[2] = inpImage.B[position];
+
+	t = findMediumTransmission(inpImage, position, size, inpParam);
 
 	if (inpParam.boosting == 1) {
 		for (int i = 0; i < size; i++) {
@@ -335,24 +270,19 @@ void Dehazing::dehazeProc(InputParameters &inpParam) {
 			else {
 				P = -2.0 * t[i] * t[i] * t[i] + 8.0 * t[i] - 3.0;
 			}
-			this->R[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->R[i] - A[0]) / P + A[0])));
-			this->G[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->G[i] - A[1]) / P + A[1])));
-			this->B[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->B[i] - A[2]) / P + A[2])));
+			outpImage.R[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.R[i] - A[0]) / P + A[0])));
+			outpImage.G[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.G[i] - A[1]) / P + A[1])));
+			outpImage.B[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.B[i] - A[2]) / P + A[2])));
 		}
 	}
 	else {
 		for (int i = 0; i < size; i++) {
-			this->R[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->R[i] - A[0]) / t[i] + A[0])));
-			this->G[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->G[i] - A[1]) / t[i] + A[1])));
-			this->B[i] = static_cast<unsigned char>(clipping0(
-					clipping255((this->B[i] - A[2]) / t[i] + A[2])));
+			outpImage.R[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.R[i] - A[0]) / t[i] + A[0])));
+			outpImage.G[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.G[i] - A[1]) / t[i] + A[1])));
+			outpImage.B[i] = static_cast<unsigned char> (clipping0(clipping255((inpImage.B[i] - A[2]) / t[i] + A[2])));
 		}
 	}
 	delete[] t;
+
 }
 

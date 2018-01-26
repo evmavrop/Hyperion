@@ -1,16 +1,24 @@
 /**
  * Hyperion
- * imageParameters.hpp
+ * inputParameters.hpp
  *
- * @author: Mavropoulos Evangelos
+ * @author: Evangelos Mavropoulos
  * @version: 1.0 12/8/2016
  */
 
 #ifndef INC_INPUTPARAMETERS_HPP_
 #define INC_INPUTPARAMETERS_HPP_
 
-#include <frame.hpp>
+#include <list>
+#include <iostream>
 #include <fstream>
+#include <stdlib.h>
+#include <opencv2/core/mat.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+using namespace std;
+using namespace cv;
 
 /**
  * A class that contains the input parameters necessary for the correct configuration of the dehazing process.
@@ -22,20 +30,13 @@ public:
 	char *inputFileName, *outputFileName;
 	int typeOfFile, blockSizeX, blockSizeY, blockSize, boosting, lowLightVideo; //JPEG = 0 YUV = 1
 
-	InputParameters() {
-		boosting = 0;
-		typeOfFile = -1;
-		inputFileName = new char[100];
-		outputFileName = new char[100];
-		blockSizeX = 9;
-		blockSizeY = 9;
-		blockSize = 81;
-		lowLightVideo = 0;
-	}
-	~InputParameters() {
-		delete[] inputFileName;
-		delete[] outputFileName;
-	}
+	InputParameters();
+	~InputParameters();
+
+	void readConfig(const char*);
+	void Configure(Mat &, const int, char**);
+	void readFromImageFile(Mat &);
+
 };
 
 #endif /* INC_INPUTPARAMETERS_HPP_ */

@@ -2,18 +2,18 @@
  * Hyperion
  * dehaze.hpp
  *
- * @author: Mavropoulos Evangelos
+ * @author: Evangelos Mavropoulos
  * @version: 1.0 12/8/2016
  */
 
 #ifndef INC_DEHAZE_HPP_
 #define INC_DEHAZE_HPP_
 
-#include <frame.hpp>
+#include <image.hpp>
 #include <inputParameters.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/mat.hpp>
-#include <tests.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 using namespace std;
 using namespace cv;
@@ -22,23 +22,21 @@ using namespace cv;
  * This class contains all the functions needed for the dehazing process and some complementary data members
  * necessary for the successful implementation of the process.
  */
-class Dehazing: public Frame {
+class Dehazing {
 private:
-	int findAirlight(int);
+	int findAirlight(Image&, int);
 	void quicksort(unsigned int **, int, int);
-	void minRGB(unsigned int **, int);
-	float *findMediumTransmission(int position, int size, InputParameters &inpParam);
-	int brightestPix(unsigned int **, int size);
-	void padding(InputParameters &inpParam);
+	void minRGB(Image&, unsigned int **, int);
+	float *findMediumTransmission(Image&, int, int, InputParameters &);
+	int brightestPix(Image&, unsigned int **, int);
+	void padding(InputParameters &);
+	void negative(Image &);
 	friend class Tests;
 
 public:
-	void dehazeProc(InputParameters &inpParam);
-	unsigned char *paddedR, *paddedG, *paddedB;
-	int paddedRGBrows, paddedRGBcols;
+	void dehazeProc(InputParameters &, Image &, Image &);
 
 	Dehazing();
-	Dehazing(Mat);
 	~Dehazing();
 };
 

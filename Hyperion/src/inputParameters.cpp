@@ -15,7 +15,7 @@ InputParameters::InputParameters() {
 	blockSizeX = 9;
 	blockSizeY = 9;
 	blockSize = 81;
-	lowLightVideo = 0;
+	lowLight = 0;
 }
 
 InputParameters::~InputParameters() {
@@ -23,11 +23,6 @@ InputParameters::~InputParameters() {
 	delete[] outputFileName;
 }
 
-/**
- * Reads the configuration file and saves the necessary values.
- *
- * @param[in] configFile
- */
 void InputParameters::readConfig(const char* configFile) {
 	ifstream config;
 	config.open(configFile, ios::in);
@@ -59,7 +54,7 @@ void InputParameters::readConfig(const char* configFile) {
 		config.getline(data, 256);
 
 		config >> numString;
-		this->lowLightVideo = atoi(numString);
+		this->lowLight = atoi(numString);
 		config.getline(data, 256);
 	}
 	else {
@@ -74,17 +69,10 @@ void InputParameters::readConfig(const char* configFile) {
 	cout << "Type of file: " << this->typeOfFile << "(JPEG = 0 Camera = 1)" << endl;
 	cout << "Block size: " << this->blockSizeX << "X" << inpParam.blockSizeY << endl;
 	cout << "Boosting: " << this->boosting << endl;
-	cout << "Low light video: " << this->lowLightVideo << endl;
+	cout << "Low light video: " << this->lowLight << endl;
 #endif
 }
 
-/**
- * Function responsible for reading and storing the input parameters and the input image.
- *
- * @param[in] ac argument counter
- * @param[in] av argument vector
- * @param[out] pFrm
- */
 void InputParameters::Configure(Mat &inpImage, const int ac, char** av) {
 	if (ac < 1) {
 		cout << "Input the configuration file name as the first argument" << endl;
@@ -94,26 +82,23 @@ void InputParameters::Configure(Mat &inpImage, const int ac, char** av) {
 		this->readConfig(av[1]);
 	}
 	else {
-		// TODO Create other input method
+		// TODO Create other input method for single images
 	}
 
 	if (this->typeOfFile == 0) {
 		this->readFromImageFile(inpImage);
 	}
 	else if (this->typeOfFile == 1) {
-		// TODO Read from camera input
+		cout << "Wrong type of file" << endl;
+		exit(-1);
 	}
 }
 
-/**
- * Reads a JPEG image and stores it in a Mat container.
- *
- * @param[out] pFrm
- */
 void InputParameters::readFromImageFile(Mat &inpImage) {
 	inpImage = cv::imread(this->inputFileName, 1);
 	if (inpImage.empty()) {
-		std::cout << "Couldn't read the image " << this->inputFileName << std::endl << "Exiting..." << std::endl;
+		std::cout << "Couldn't read the image " << this->inputFileName << std::endl << "Exiting..."
+				<< std::endl;
 		exit(-1);
 	}
 }

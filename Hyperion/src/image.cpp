@@ -41,9 +41,6 @@ Image::Image(const Mat& imageMat) {
 	}
 }
 
-/**
- * Generate space around the image with size relative to the padSize.
- */
 Image::Image(const Image &originalImage, int padSizeY, int padSizeX) {
 	int rows = this->RGBrows = originalImage.RGBrows + 2 * padSizeY;
 	int cols = this->RGBcols = originalImage.RGBcols + 2 * padSizeX;

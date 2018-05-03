@@ -1,0 +1,70 @@
+\hypertarget{classDehazing}{}\section{Dehazing Class Reference}
+\label{classDehazing}\index{Dehazing@{Dehazing}}
+
+
+\mbox{\hyperlink{classDehazing}{Dehazing}} process class This class contains all the functions needed for the dehazing process and some complementary data members necessary for the successful implementation of the process.  
+
+
+
+
+{\ttfamily \#include $<$dehaze.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classDehazing_aed396d0b90fb3be954e88e694fee3431}{dehaze\+Proc}} (\mbox{\hyperlink{classInputParameters}{Input\+Parameters}} \&, \mbox{\hyperlink{classImage}{Image}} \&, \mbox{\hyperlink{classImage}{Image}} \&)
+\item 
+\mbox{\hyperlink{classDehazing_a29e4ac3dc09c0caff68e7eda287b378d}{Dehazing}} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDehazing_ac1cb630eed1dec7b1ead718c1e2891ba}\label{classDehazing_ac1cb630eed1dec7b1ead718c1e2891ba}} 
+class {\bfseries Tests}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classDehazing}{Dehazing}} process class This class contains all the functions needed for the dehazing process and some complementary data members necessary for the successful implementation of the process. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDehazing_a29e4ac3dc09c0caff68e7eda287b378d}\label{classDehazing_a29e4ac3dc09c0caff68e7eda287b378d}} 
+\index{Dehazing@{Dehazing}!Dehazing@{Dehazing}}
+\index{Dehazing@{Dehazing}!Dehazing@{Dehazing}}
+\subsubsection{\texorpdfstring{Dehazing()}{Dehazing()}}
+{\footnotesize\ttfamily Dehazing\+::\+Dehazing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Hyperion dehaze.\+cpp Purpose\+: Contains the functions required for the dehazing process
+
+\begin{DoxyAuthor}{Author}
+\+: Evangelos Mavropoulos 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+\+: 1.\+0 12/8/2016 This constructor\textquotesingle{}s values are used for testing. 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classDehazing_aed396d0b90fb3be954e88e694fee3431}\label{classDehazing_aed396d0b90fb3be954e88e694fee3431}} 
+\index{Dehazing@{Dehazing}!dehaze\+Proc@{dehaze\+Proc}}
+\index{dehaze\+Proc@{dehaze\+Proc}!Dehazing@{Dehazing}}
+\subsubsection{\texorpdfstring{dehaze\+Proc()}{dehazeProc()}}
+{\footnotesize\ttfamily void Dehazing\+::dehaze\+Proc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classInputParameters}{Input\+Parameters}} \&}]{inp\+Param,  }\item[{\mbox{\hyperlink{classImage}{Image}} \&}]{inp\+Image,  }\item[{\mbox{\hyperlink{classImage}{Image}} \&}]{outp\+Image }\end{DoxyParamCaption})}
+
+Applies the dehazing process on the image contained in the object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inp\+Param} & Parameters of the dehazing process \\
+\hline
+{\em inp\+Image} & Input image \\
+\hline
+{\em outp\+Image} & Output image \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Hyperion/inc/dehaze.\+hpp\item 
+Hyperion/src/dehaze.\+cpp\end{DoxyCompactItemize}

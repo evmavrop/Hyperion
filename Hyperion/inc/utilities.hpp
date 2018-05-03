@@ -12,7 +12,7 @@
 
 namespace utilities {
 
-void fromArrayToMat(Mat &, Image &);
+	void fromImageToMat(Mat &, Image &);
 
 }
 

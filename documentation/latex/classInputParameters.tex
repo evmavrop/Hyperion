@@ -1,0 +1,171 @@
+\hypertarget{classInputParameters}{}\section{Input\+Parameters Class Reference}
+\label{classInputParameters}\index{Input\+Parameters@{Input\+Parameters}}
+
+
+{\ttfamily \#include $<$input\+Parameters.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classInputParameters_a2ede6d73636729561755f9ca986475f8}{Input\+Parameters}} ()
+\item 
+void \mbox{\hyperlink{classInputParameters_ad6f1b367bcdc1dfc0264ae174d593a91}{read\+Config}} (const char $\ast$config\+File)
+\begin{DoxyCompactList}\small\item\em Read config Reads the configuration file and saves the necessary values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classInputParameters_a1336d233e7d6114fdae7dca422a34f17}{Configure}} (Mat \&inp\+Image, const int ac, char $\ast$$\ast$av)
+\begin{DoxyCompactList}\small\item\em Read config parameters Function responsible for reading and storing the input parameters and the input image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classInputParameters_a3fbb650aef6f1e08d2bfea252d0386ee}{read\+From\+Image\+File}} (Mat \&inp\+Image)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ifstream \mbox{\hyperlink{classInputParameters_a01444453de5dc29f533e1c783b9507ca}{input\+Stream}}
+\item 
+char $\ast$ \mbox{\hyperlink{classInputParameters_acc0101435d7d373b40d07a73402ee0b5}{input\+File\+Name}}
+\item 
+char $\ast$ \mbox{\hyperlink{classInputParameters_a600055c1868b95a16fad133a356324f9}{output\+File\+Name}}
+\item 
+int \mbox{\hyperlink{classInputParameters_a826c20599ad2c8d4f82f1b84055668dd}{type\+Of\+File}}
+\item 
+int \mbox{\hyperlink{classInputParameters_a4386973ae0bf43b9040f2bbd0acfcdc0}{block\+SizeX}}
+\item 
+int \mbox{\hyperlink{classInputParameters_af52112e4d8fbd0e3b137bbb8396222ed}{block\+SizeY}}
+\item 
+int \mbox{\hyperlink{classInputParameters_a0a4b4c27431edde22c7c53746543f3c3}{block\+Size}}
+\item 
+int \mbox{\hyperlink{classInputParameters_a3a6b7bb91a4bc6f912a1c7744109dbb1}{boosting}}
+\item 
+int \mbox{\hyperlink{classInputParameters_a79b3781b35f652c9ffea72703f0f69c4}{low\+Light}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that contains the input parameters necessary for the correct configuration of the dehazing process. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classInputParameters_a2ede6d73636729561755f9ca986475f8}\label{classInputParameters_a2ede6d73636729561755f9ca986475f8}} 
+\index{Input\+Parameters@{Input\+Parameters}!Input\+Parameters@{Input\+Parameters}}
+\index{Input\+Parameters@{Input\+Parameters}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{Input\+Parameters()}{InputParameters()}}
+{\footnotesize\ttfamily Input\+Parameters\+::\+Input\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Hyperion input\+Parameters.\+cpp
+
+\begin{DoxyAuthor}{Author}
+\+: Evangelos Mavropoulos 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+\+: 1.\+0 12/8/2016 
+\end{DoxyVersion}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classInputParameters_a1336d233e7d6114fdae7dca422a34f17}\label{classInputParameters_a1336d233e7d6114fdae7dca422a34f17}} 
+\index{Input\+Parameters@{Input\+Parameters}!Configure@{Configure}}
+\index{Configure@{Configure}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{Configure()}{Configure()}}
+{\footnotesize\ttfamily void Input\+Parameters\+::\+Configure (\begin{DoxyParamCaption}\item[{Mat \&}]{inp\+Image,  }\item[{const int}]{ac,  }\item[{char $\ast$$\ast$}]{av }\end{DoxyParamCaption})}
+
+
+
+Read config parameters Function responsible for reading and storing the input parameters and the input image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inp\+Image} & input\+Image \\
+\hline
+{\em ac} & argument counter \\
+\hline
+{\em av} & argument vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInputParameters_ad6f1b367bcdc1dfc0264ae174d593a91}\label{classInputParameters_ad6f1b367bcdc1dfc0264ae174d593a91}} 
+\index{Input\+Parameters@{Input\+Parameters}!read\+Config@{read\+Config}}
+\index{read\+Config@{read\+Config}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{read\+Config()}{readConfig()}}
+{\footnotesize\ttfamily void Input\+Parameters\+::read\+Config (\begin{DoxyParamCaption}\item[{const char $\ast$}]{config\+File }\end{DoxyParamCaption})}
+
+
+
+Read config Reads the configuration file and saves the necessary values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+File} & Configure file name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classInputParameters_a3fbb650aef6f1e08d2bfea252d0386ee}\label{classInputParameters_a3fbb650aef6f1e08d2bfea252d0386ee}} 
+\index{Input\+Parameters@{Input\+Parameters}!read\+From\+Image\+File@{read\+From\+Image\+File}}
+\index{read\+From\+Image\+File@{read\+From\+Image\+File}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{read\+From\+Image\+File()}{readFromImageFile()}}
+{\footnotesize\ttfamily void Input\+Parameters\+::read\+From\+Image\+File (\begin{DoxyParamCaption}\item[{Mat \&}]{inp\+Image }\end{DoxyParamCaption})}
+
+Reads a J\+P\+EG image and stores it in a Mat container.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inp\+Image} & Input \mbox{\hyperlink{classImage}{Image}} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classInputParameters_a0a4b4c27431edde22c7c53746543f3c3}\label{classInputParameters_a0a4b4c27431edde22c7c53746543f3c3}} 
+\index{Input\+Parameters@{Input\+Parameters}!block\+Size@{block\+Size}}
+\index{block\+Size@{block\+Size}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{block\+Size}{blockSize}}
+{\footnotesize\ttfamily int Input\+Parameters\+::block\+Size}
+
+Size of block \mbox{\Hypertarget{classInputParameters_a4386973ae0bf43b9040f2bbd0acfcdc0}\label{classInputParameters_a4386973ae0bf43b9040f2bbd0acfcdc0}} 
+\index{Input\+Parameters@{Input\+Parameters}!block\+SizeX@{block\+SizeX}}
+\index{block\+SizeX@{block\+SizeX}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{block\+SizeX}{blockSizeX}}
+{\footnotesize\ttfamily int Input\+Parameters\+::block\+SizeX}
+
+Number of rows in a block \mbox{\Hypertarget{classInputParameters_af52112e4d8fbd0e3b137bbb8396222ed}\label{classInputParameters_af52112e4d8fbd0e3b137bbb8396222ed}} 
+\index{Input\+Parameters@{Input\+Parameters}!block\+SizeY@{block\+SizeY}}
+\index{block\+SizeY@{block\+SizeY}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{block\+SizeY}{blockSizeY}}
+{\footnotesize\ttfamily int Input\+Parameters\+::block\+SizeY}
+
+Number of columns in a block \mbox{\Hypertarget{classInputParameters_a3a6b7bb91a4bc6f912a1c7744109dbb1}\label{classInputParameters_a3a6b7bb91a4bc6f912a1c7744109dbb1}} 
+\index{Input\+Parameters@{Input\+Parameters}!boosting@{boosting}}
+\index{boosting@{boosting}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{boosting}{boosting}}
+{\footnotesize\ttfamily int Input\+Parameters\+::boosting}
+
+Use of boosting\+: Y\+ES = 1 NO = 0 \mbox{\Hypertarget{classInputParameters_acc0101435d7d373b40d07a73402ee0b5}\label{classInputParameters_acc0101435d7d373b40d07a73402ee0b5}} 
+\index{Input\+Parameters@{Input\+Parameters}!input\+File\+Name@{input\+File\+Name}}
+\index{input\+File\+Name@{input\+File\+Name}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{input\+File\+Name}{inputFileName}}
+{\footnotesize\ttfamily char$\ast$ Input\+Parameters\+::input\+File\+Name}
+
+Input file name \mbox{\Hypertarget{classInputParameters_a01444453de5dc29f533e1c783b9507ca}\label{classInputParameters_a01444453de5dc29f533e1c783b9507ca}} 
+\index{Input\+Parameters@{Input\+Parameters}!input\+Stream@{input\+Stream}}
+\index{input\+Stream@{input\+Stream}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{input\+Stream}{inputStream}}
+{\footnotesize\ttfamily std\+::ifstream Input\+Parameters\+::input\+Stream}
+
+Input stream in case of video stream \mbox{\Hypertarget{classInputParameters_a79b3781b35f652c9ffea72703f0f69c4}\label{classInputParameters_a79b3781b35f652c9ffea72703f0f69c4}} 
+\index{Input\+Parameters@{Input\+Parameters}!low\+Light@{low\+Light}}
+\index{low\+Light@{low\+Light}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{low\+Light}{lowLight}}
+{\footnotesize\ttfamily int Input\+Parameters\+::low\+Light}
+
+The input is lowlight\+: Y\+ES = 1 NO = 0 \mbox{\Hypertarget{classInputParameters_a600055c1868b95a16fad133a356324f9}\label{classInputParameters_a600055c1868b95a16fad133a356324f9}} 
+\index{Input\+Parameters@{Input\+Parameters}!output\+File\+Name@{output\+File\+Name}}
+\index{output\+File\+Name@{output\+File\+Name}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{output\+File\+Name}{outputFileName}}
+{\footnotesize\ttfamily char$\ast$ Input\+Parameters\+::output\+File\+Name}
+
+Output file name \mbox{\Hypertarget{classInputParameters_a826c20599ad2c8d4f82f1b84055668dd}\label{classInputParameters_a826c20599ad2c8d4f82f1b84055668dd}} 
+\index{Input\+Parameters@{Input\+Parameters}!type\+Of\+File@{type\+Of\+File}}
+\index{type\+Of\+File@{type\+Of\+File}!Input\+Parameters@{Input\+Parameters}}
+\subsubsection{\texorpdfstring{type\+Of\+File}{typeOfFile}}
+{\footnotesize\ttfamily int Input\+Parameters\+::type\+Of\+File}
+
+Type of input file\+: J\+P\+EG = 0 Y\+UV = 1 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Hyperion/inc/input\+Parameters.\+hpp\item 
+Hyperion/src/input\+Parameters.\+cpp\end{DoxyCompactItemize}

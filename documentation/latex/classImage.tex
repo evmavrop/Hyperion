@@ -1,0 +1,172 @@
+\hypertarget{classImage}{}\section{Image Class Reference}
+\label{classImage}\index{Image@{Image}}
+
+
+\mbox{\hyperlink{classImage}{Image}} class A class that contains arrays that are used as storages for R\+GB images.  
+
+
+
+
+{\ttfamily \#include $<$image.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classImage_a58edd1c45b4faeb5f789b0d036d02313}{Image}} ()
+\item 
+\mbox{\hyperlink{classImage_adc39a6501723c1f780b60ad9893f9c4b}{Image}} (const Mat \&image\+Mat)
+\begin{DoxyCompactList}\small\item\em From Mat to \mbox{\hyperlink{classImage}{Image}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classImage_a30440c1cf34a9903677f01beeba11fc6}{Image}} (const \mbox{\hyperlink{classImage}{Image}} \&original\+Image)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classImage_a4659ef8497580de3385deecd66ff948e}{Image}} (const \mbox{\hyperlink{classImage}{Image}} \&original\+Image, int pad\+SizeY, int pad\+SizeX)
+\begin{DoxyCompactList}\small\item\em Padding Padding of the image. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classImage_a6fdf11ab4ab71e96364eaa874c0ffcb8}{Image}} (int, int, unsigned char)
+\begin{DoxyCompactList}\small\item\em Empty contrainer constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classImage_a889c1999ea31650f1337ba4c349a9d69}{R\+G\+Brows}}
+\item 
+int \mbox{\hyperlink{classImage_a83e180c07c91e9bc194e52f962a3edd3}{R\+G\+Bcols}}
+\item 
+unsigned char $\ast$ \mbox{\hyperlink{classImage_a7792d25cb1b88da78b52994d25e66c50}{R}}
+\item 
+unsigned char $\ast$ \mbox{\hyperlink{classImage_a6678f22311b545bb530a9138d3639bdd}{G}}
+\item 
+unsigned char $\ast$ \mbox{\hyperlink{classImage_a360ce541c19a88fef24a08cbebceeac5}{B}}
+\item 
+unsigned char \mbox{\hyperlink{classImage_a1cbaf48be2c575a75bd06d624ba91b41}{channels}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{classImage}{Image}} class A class that contains arrays that are used as storages for R\+GB images. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classImage_a58edd1c45b4faeb5f789b0d036d02313}\label{classImage_a58edd1c45b4faeb5f789b0d036d02313}} 
+\index{Image@{Image}!Image@{Image}}
+\index{Image@{Image}!Image@{Image}}
+\subsubsection{\texorpdfstring{Image()}{Image()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Image\+::\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Hyperion frame.\+cpp
+
+\begin{DoxyAuthor}{Author}
+\+: Evangelos Mavropoulos 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+\+: 1.\+0 12/8/2016 
+\end{DoxyVersion}
+\mbox{\Hypertarget{classImage_adc39a6501723c1f780b60ad9893f9c4b}\label{classImage_adc39a6501723c1f780b60ad9893f9c4b}} 
+\index{Image@{Image}!Image@{Image}}
+\index{Image@{Image}!Image@{Image}}
+\subsubsection{\texorpdfstring{Image()}{Image()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Image\+::\+Image (\begin{DoxyParamCaption}\item[{const Mat \&}]{image\+Mat }\end{DoxyParamCaption})}
+
+
+
+From Mat to \mbox{\hyperlink{classImage}{Image}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image\+Mat} & \mbox{\hyperlink{classImage}{Image}} to be copied \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classImage_a30440c1cf34a9903677f01beeba11fc6}\label{classImage_a30440c1cf34a9903677f01beeba11fc6}} 
+\index{Image@{Image}!Image@{Image}}
+\index{Image@{Image}!Image@{Image}}
+\subsubsection{\texorpdfstring{Image()}{Image()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Image\+::\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{original\+Image }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em original\+Image} & \mbox{\hyperlink{classImage}{Image}} to be copied \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classImage_a4659ef8497580de3385deecd66ff948e}\label{classImage_a4659ef8497580de3385deecd66ff948e}} 
+\index{Image@{Image}!Image@{Image}}
+\index{Image@{Image}!Image@{Image}}
+\subsubsection{\texorpdfstring{Image()}{Image()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Image\+::\+Image (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classImage}{Image}} \&}]{original\+Image,  }\item[{int}]{pad\+SizeY,  }\item[{int}]{pad\+SizeX }\end{DoxyParamCaption})}
+
+
+
+Padding Padding of the image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em original\+Image} & The initial image \\
+\hline
+{\em pad\+SizeY} & Padding of rows \\
+\hline
+{\em pad\+SizeX} & Padding of cols \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classImage_a6fdf11ab4ab71e96364eaa874c0ffcb8}\label{classImage_a6fdf11ab4ab71e96364eaa874c0ffcb8}} 
+\index{Image@{Image}!Image@{Image}}
+\index{Image@{Image}!Image@{Image}}
+\subsubsection{\texorpdfstring{Image()}{Image()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Image\+::\+Image (\begin{DoxyParamCaption}\item[{int}]{rows,  }\item[{int}]{cols,  }\item[{unsigned char}]{channels }\end{DoxyParamCaption})}
+
+
+
+Empty contrainer constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rows} & Rows \\
+\hline
+{\em cols} & Columns \\
+\hline
+{\em channels} & Channels of the image \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classImage_a360ce541c19a88fef24a08cbebceeac5}\label{classImage_a360ce541c19a88fef24a08cbebceeac5}} 
+\index{Image@{Image}!B@{B}}
+\index{B@{B}!Image@{Image}}
+\subsubsection{\texorpdfstring{B}{B}}
+{\footnotesize\ttfamily unsigned char$\ast$ Image\+::B}
+
+Blue value of pixels \mbox{\Hypertarget{classImage_a1cbaf48be2c575a75bd06d624ba91b41}\label{classImage_a1cbaf48be2c575a75bd06d624ba91b41}} 
+\index{Image@{Image}!channels@{channels}}
+\index{channels@{channels}!Image@{Image}}
+\subsubsection{\texorpdfstring{channels}{channels}}
+{\footnotesize\ttfamily unsigned char Image\+::channels}
+
+Channels of the image \mbox{\Hypertarget{classImage_a6678f22311b545bb530a9138d3639bdd}\label{classImage_a6678f22311b545bb530a9138d3639bdd}} 
+\index{Image@{Image}!G@{G}}
+\index{G@{G}!Image@{Image}}
+\subsubsection{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily unsigned char$\ast$ Image\+::G}
+
+Green value of pixels \mbox{\Hypertarget{classImage_a7792d25cb1b88da78b52994d25e66c50}\label{classImage_a7792d25cb1b88da78b52994d25e66c50}} 
+\index{Image@{Image}!R@{R}}
+\index{R@{R}!Image@{Image}}
+\subsubsection{\texorpdfstring{R}{R}}
+{\footnotesize\ttfamily unsigned char$\ast$ Image\+::R}
+
+Red value of pixels \mbox{\Hypertarget{classImage_a83e180c07c91e9bc194e52f962a3edd3}\label{classImage_a83e180c07c91e9bc194e52f962a3edd3}} 
+\index{Image@{Image}!R\+G\+Bcols@{R\+G\+Bcols}}
+\index{R\+G\+Bcols@{R\+G\+Bcols}!Image@{Image}}
+\subsubsection{\texorpdfstring{R\+G\+Bcols}{RGBcols}}
+{\footnotesize\ttfamily int Image\+::\+R\+G\+Bcols}
+
+\mbox{\hyperlink{classImage}{Image}} columns \mbox{\Hypertarget{classImage_a889c1999ea31650f1337ba4c349a9d69}\label{classImage_a889c1999ea31650f1337ba4c349a9d69}} 
+\index{Image@{Image}!R\+G\+Brows@{R\+G\+Brows}}
+\index{R\+G\+Brows@{R\+G\+Brows}!Image@{Image}}
+\subsubsection{\texorpdfstring{R\+G\+Brows}{RGBrows}}
+{\footnotesize\ttfamily int Image\+::\+R\+G\+Brows}
+
+\mbox{\hyperlink{classImage}{Image}} rows 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Hyperion/inc/image.\+hpp\item 
+Hyperion/src/image.\+cpp\end{DoxyCompactItemize}

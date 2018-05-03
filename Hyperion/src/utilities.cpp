@@ -11,10 +11,10 @@
 /**
  * Copies the input image in a container of type Mat.
  *
- * @param[in] image
- * @param[out] imageMat
+ * @param image
+ * @param imageMat
  */
-void utilities::fromArrayToMat(Mat &imageMat, Image &image) {
+void utilities::fromImageToMat(Mat &imageMat, Image &image) {
 	int rows = imageMat.rows;
 	int cols = imageMat.cols;
 	int channels = imageMat.channels();

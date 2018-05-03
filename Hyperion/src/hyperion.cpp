@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
 		dh.dehazeProc(inpParam, img, outputImage);
 		Mat outImageMat(outputImage.RGBrows, outputImage.RGBcols, inpImageMat.type());
 
-		utilities::fromArrayToMat(outImageMat, outputImage);
+		utilities::fromImageToMat(outImageMat, outputImage);
 		imwrite(inpParam.outputFileName, outImageMat);
 #if DEBUG
 		t = clock() - t;

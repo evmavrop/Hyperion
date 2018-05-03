@@ -24,18 +24,45 @@ using namespace cv;
  * A class that contains the input parameters necessary for the correct configuration of the dehazing process.
  */
 class InputParameters {
-private:
-public:
-	std::ifstream inputStream; // Input stream in case of video stream
-	char *inputFileName, *outputFileName;
-	int typeOfFile, blockSizeX, blockSizeY, blockSize, boosting, lowLightVideo; //JPEG = 0 YUV = 1
+	private:
+	public:
+		std::ifstream inputStream; /**<Input stream in case of video stream*/
+		char *inputFileName; /**<Input file name*/
+		char *outputFileName; /**<Output file name*/
+		int typeOfFile; /**<Type of input file: JPEG = 0 YUV = 1*/
 
-	InputParameters();
-	~InputParameters();
+		int blockSizeX; /**<Number of rows in a block*/
+		int blockSizeY; /**<Number of columns in a block*/
+		int blockSize; /**<Size of block*/
+		int boosting; /**<Use of boosting: YES = 1 NO = 0*/
+		int lowLight; /**<The input is lowlight:  YES = 1 NO = 0*/
 
-	void readConfig(const char*);
-	void Configure(Mat &, const int, char**);
-	void readFromImageFile(Mat &);
+		InputParameters();
+		~InputParameters();
+
+		/**
+		 * @brief Read config
+		 * Reads the configuration file and saves the necessary values.
+		 *
+		 * @param configFile Configure file name
+		 */
+		void readConfig(const char* configFile);
+
+		/**
+		 * @brief Read config parameters
+		 * Function responsible for reading and storing the input parameters and the input image.
+		 *
+		 * @param inpImage inputImage
+		 * @param ac argument counter
+		 * @param av argument vector
+		 */
+		void Configure(Mat& inpImage, const int ac, char** av);
+		/**
+		 * Reads a JPEG image and stores it in a Mat container.
+		 *
+		 * @param inpImage Input Image
+		 */
+		void readFromImageFile(Mat &inpImage);
 
 };
 

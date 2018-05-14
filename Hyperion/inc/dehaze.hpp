@@ -3,7 +3,7 @@
  * dehaze.hpp
  *
  * @author: Evangelos Mavropoulos
- * @version: 1.0 12/8/2016
+ * @date: 12/8/2016
  */
 
 #ifndef INC_DEHAZE_HPP_

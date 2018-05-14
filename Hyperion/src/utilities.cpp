@@ -2,8 +2,8 @@
  * Hyperion
  * utilities.cpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 14/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 14/8/2016
  */
 
 #include <utilities.hpp>
@@ -11,8 +11,8 @@
 /**
  * Copies the input image in a container of type Mat.
  *
- * @param image
- * @param imageMat
+ * @param image Input Image container
+ * @param imageMat Output Mat container
  */
 void utilities::fromImageToMat(Mat &imageMat, Image &image) {
 	int rows = imageMat.rows;

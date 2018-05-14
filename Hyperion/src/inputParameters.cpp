@@ -2,16 +2,16 @@
  * Hyperion
  * inputParameters.cpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 12/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 12/8/2016
  */
 #include <inputParameters.hpp>
 
 InputParameters::InputParameters() {
 	boosting = 0;
 	typeOfFile = -1;
-	inputFileName = new char[100];
-	outputFileName = new char[100];
+	inputFileName = "";
+	outputFileName = "";
 	blockSizeX = 9;
 	blockSizeY = 9;
 	blockSize = 81;
@@ -19,8 +19,6 @@ InputParameters::InputParameters() {
 }
 
 InputParameters::~InputParameters() {
-	delete[] inputFileName;
-	delete[] outputFileName;
 }
 
 void InputParameters::readConfig(const char* configFile) {
@@ -73,7 +71,7 @@ void InputParameters::readConfig(const char* configFile) {
 #endif
 }
 
-void InputParameters::Configure(Mat &inpImage, const int ac, char** av) {
+void InputParameters::Configure(const int ac, char** av) {
 	if (ac < 1) {
 		cout << "Input the configuration file name as the first argument" << endl;
 		exit(-1);
@@ -82,14 +80,7 @@ void InputParameters::Configure(Mat &inpImage, const int ac, char** av) {
 		this->readConfig(av[1]);
 	}
 	else {
-		// TODO Create other input method for single images
-	}
-
-	if (this->typeOfFile == 0) {
-		this->readFromImageFile(inpImage);
-	}
-	else if (this->typeOfFile == 1) {
-		cout << "Wrong type of file" << endl;
+		cout << "Unknown arguments" << endl;
 		exit(-1);
 	}
 }
@@ -97,9 +88,16 @@ void InputParameters::Configure(Mat &inpImage, const int ac, char** av) {
 void InputParameters::readFromImageFile(Mat &inpImage) {
 	inpImage = cv::imread(this->inputFileName, 1);
 	if (inpImage.empty()) {
-		std::cout << "Couldn't read the image " << this->inputFileName << std::endl << "Exiting..."
+		std::cout << "Couldn't read the image " << this->inputFileName << endl << "Exiting..."
 				<< std::endl;
-		exit(-1);
 	}
 }
 
+void InputParameters::readFromVideoFile(VideoCapture &inputVideo) {
+	inputVideo  = VideoCapture(this->inputFileName);
+	if (!inputVideo.isOpened()) {
+		cout << "Could not open the input video: " << this->inputFileName << endl << "Exiting...";
+		exit(-1);
+	}
+
+}

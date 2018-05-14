@@ -2,8 +2,8 @@
  * Hyperion
  * inputParameters.hpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 12/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 12/8/2016
  */
 
 #ifndef INC_INPUTPARAMETERS_HPP_
@@ -13,6 +13,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <string>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -27,8 +28,8 @@ class InputParameters {
 	private:
 	public:
 		std::ifstream inputStream; /**<Input stream in case of video stream*/
-		char *inputFileName; /**<Input file name*/
-		char *outputFileName; /**<Output file name*/
+		string inputFileName; /**<Input file name*/
+		string outputFileName; /**<Output file name*/
 		int typeOfFile; /**<Type of input file: JPEG = 0 YUV = 1*/
 
 		int blockSizeX; /**<Number of rows in a block*/
@@ -52,18 +53,22 @@ class InputParameters {
 		 * @brief Read config parameters
 		 * Function responsible for reading and storing the input parameters and the input image.
 		 *
-		 * @param inpImage inputImage
 		 * @param ac argument counter
 		 * @param av argument vector
 		 */
-		void Configure(Mat& inpImage, const int ac, char** av);
+		void Configure(const int ac, char** av);
 		/**
-		 * Reads a JPEG image and stores it in a Mat container.
+		 * @brief Reads a JPEG image.
 		 *
 		 * @param inpImage Input Image
 		 */
 		void readFromImageFile(Mat &inpImage);
-
+		/**
+		 * @brief Reads a Video file.
+		 *
+		 * @param inputVideo Input Video stream.
+		 */
+		void readFromVideoFile(VideoCapture &inputVideo) ;
 };
 
 #endif /* INC_INPUTPARAMETERS_HPP_ */

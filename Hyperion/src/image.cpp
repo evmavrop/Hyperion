@@ -2,10 +2,11 @@
  * Hyperion
  * frame.cpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 12/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 12/8/2016
  */
 #include <image.hpp>
+#include <iostream>
 
 Image::Image() {
 	this->RGBrows = 0;

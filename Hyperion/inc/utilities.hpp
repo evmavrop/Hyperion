@@ -2,8 +2,8 @@
  * Hyperion
  * utilities.hpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 14/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 14/8/2016
  */
 #ifndef UTILITIES_HPP_
 #define UTILITIES_HPP_

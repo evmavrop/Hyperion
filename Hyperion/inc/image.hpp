@@ -2,8 +2,8 @@
  * Hyperion
  * frame.hpp
  *
- * @author: Evangelos Mavropoulos
- * @version: 1.0 12/8/2016
+ * @author: Evangelos Mavropoulos <evmavrop@gmail.com>
+ * @date: 12/8/2016
  */
 
 #ifndef INC_IMAGE_HPP_
